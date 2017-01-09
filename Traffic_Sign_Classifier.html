@@ -13886,6 +13886,23 @@ use train_test_split function to do the split. Split 90% as the train data, 10% 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
+<p>The architecture use CNN(convolutional neuro network). It has 5 layers.</p>
+<p>Layer1: Convolutional 
+   Input: 32<em>32</em>3
+   Output: 14<em>14</em>6</p>
+<p>Layer2: Convolutional
+    Input: 14<em>14</em>6
+    Output: 5<em>5</em>16</p>
+<p>Flatten to 400</p>
+<p>Layer3: Fully Connected
+    Input: 400
+    Output: 120</p>
+<p>Layer4: Fully Connected
+    Input: 120
+    Output: 84</p>
+<p>Layer5: Fully Connected
+    Input: 84
+    Output: 10</p>
 
 </div>
 </div>
@@ -13966,15 +13983,17 @@ logits = tf.add(tf.matmul(conv4,weight_layer_5), bias_layer_5)</code></pre>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>EPOCHS = 50</p>
-<p>BATCH_SIZE = 128</p>
-<p>rate = 0.001</p>
-<p>cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits, one_hot_y)</p>
-<p>loss_operation = tf.reduce_mean(cross_entropy)</p>
-<p>optimizer = tf.train.AdamOptimizer(learning_rate = rate)</p>
-<p>training_operation = optimizer.minimize(loss_operation)</p>
-<p>correct_prediction = tf.equal(tf.argmax(logits, 1), tf.argmax(one_hot_y, 1))</p>
-<p>accuracy_operation = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</p>
+<p>The model trainning use 50 EPOCHS, each epoch run min batch, with BATCH_SIZE = 128</p>
+<p>The rate set to 0.001</p>
+<p>The optimizer use AdamOptimizer. 
+The reason why use AdamOptimizer is that, the tf.train.AdamOptimizer use Kingma and Ba's Adam algorithm to control the learning rate. It has several advantages over simple GradientDescentOptimizer. It use moving average of parameters, it enables Adam to use larger effective step size, and the algorithm will converge to this step size without fine tunning.</p>
+<p>The steps to set the optimizer as follows:</p>
+<p>cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits, one_hot_y)
+loss_operation = tf.reduce_mean(cross_entropy)
+optimizer = tf.train.AdamOptimizer(learning_rate = rate)
+training_operation = optimizer.minimize(loss_operation)
+correct_prediction = tf.equal(tf.argmax(logits, 1), tf.argmax(one_hot_y, 1))
+accuracy_operation = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</p>
 
 </div>
 </div>
@@ -13996,6 +14015,10 @@ logits = tf.add(tf.matmul(conv4,weight_layer_5), bias_layer_5)</code></pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>I use leNet to solve this problem because the traffic sign dataset and results are similiar with the letNet issue.</p>
+<p>The network size increase didn't provide too much improvement of the accuracy. This solution use a middle size network</p>
+<p>The accuracy increases when the epoch increases, but it won't grow too much after epoch reach around 30. So I set the epoch size to 50.</p>
+<p>When I wrote the first version, the accurate rate is very low. I think that's because of the training data may aggregated by order,  then I set the shuffer before training. Then the accuracy increased a lot.</p>
+<p>Then I test the result on new image from internet, it get lower correctness. Then I roated the original training image and train with more data. Then the test result looks much better.</p>
 
 </div>
 </div>
@@ -14896,6 +14919,9 @@ DRJtg1Syly4AAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
+<p>The first sign didn't get correct result. I think one of the reason is that there are some background colors. Another reason maybe because of the image was scaled and crop with a different scale as the training data.</p>
+<p>For the first reason, we may need do some preprocess of the data, detect the border of the sign, remove the useless pixels.
+For the second reason, we may need find more training material, or scale the training data to generate those training materials to get more accurate results.</p>
 
 </div>
 </div>
@@ -15133,18 +15159,15 @@ TopKV2(values=array([[  1.00000000e+00,   2.29943247e-08,   2.11003259e-09]], dt
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For most of the results, the probabilities are quite high. Except for #9000, the rate is 0.79. The result choose that highest probabilite one as the result.</p>
 
 </div>
 </div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
