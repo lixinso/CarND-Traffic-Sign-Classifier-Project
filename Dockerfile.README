@@ -1,0 +1,3 @@
+docker build . -t carnd_p2_trafficsign -f Dockerfile
+
+docker run -v $PWD:/mydir -p 8888:8888 --rm -it carnd_p2_trafficsign
