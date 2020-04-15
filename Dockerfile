@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM udacity/carnd-term1-starter-kit
 LABEL Maintainer="Xinsong Li <lixinso@gmail.com>"
 
 RUN apt update -y
