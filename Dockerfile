@@ -10,6 +10,7 @@ RUN python3 -m pip install --upgrade pip
 RUN DEBIAN_FRONTEND=noninteractive apt install -y python3-notebook
 
 RUN apt install -y ipython3
+RUN pip3 install --ignore-installed pyzmq
 RUN pip3 install  jupyter
 RUN pip3 install 'prompt-toolkit<2.0.0,>=1.0.15' --force-reinstall
 RUN pip3 install pillow
