@@ -18,7 +18,7 @@ RUN pip install opencv-python
 RUN pip install moviepy
 RUN pip install matplotlib
 RUN apt install -y libsm6 libxext6 libxrender-dev
-
+RUN apt install -y wget unzip
 
 RUN mkdir /mydir
 VOLUME ["/mydir"]
