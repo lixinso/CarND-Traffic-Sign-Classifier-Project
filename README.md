@@ -31,3 +31,10 @@ jupyter notebook Traffic_Signs_Recognition.ipynb
 ```
 3. Follow the instructions in the `Traffic_Signs_Recognition.ipynb` notebook.
 
+# References
+
+### LeNet
+
+[Gradient-Based Learning Applied to Document Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf)
+[LeNet Wikipedia](https://en.wikipedia.org/wiki/LeNet#:~:text=LeNet%20is%20a%20convolutional%20neural,a%20simple%20convolutional%20neural%20network.)
+[LeNet](http://yann.lecun.com/exdb/lenet/)
